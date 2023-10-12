@@ -1,0 +1,75 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+class Person {
+public:
+    Person(const std::string& name) : name(name) {}
+    std::string getName() const { return name; }
+    
+private:
+    std::string name;
+};
+
+class Student : public Person {
+public:
+    Student(const std::string& name) : Person(name) {}
+    
+    void addCourse(const std::string& course) {
+        if (courses.size() < 10) {
+            courses.push_back(course);
+        } else {
+            std::cout << "Student is already enrolled in 10 courses. Cannot add more." << std::endl;
+        }
+    }
+    
+    void removeCourse(const std::string& course) {
+        for (size_t i = 0; i < courses.size(); ++i) {
+            if (courses[i] == course) {
+                courses.erase(courses.begin() + i);
+                return;
+            }
+        }
+        std::cout << "Course not found in the student's list." << std::endl;
+    }
+    
+    void listCourses() const {
+        std::cout << "Courses for student " << getName() << ": ";
+        for (const std::string& course : courses) {
+            std::cout << course << " ";
+        }
+        std::cout << std::endl;
+    }
+    
+private:
+    std::vector<std::string> courses;
+};
+
+class Professor : public Person {
+public:
+    Professor(const std::string& name, const std::string& officeLocation)
+        : Person(name), officeLocation(officeLocation) {}
+    
+    void displayOfficeLocation() const {
+        std::cout << "Professor " << getName() << " has office at " << officeLocation << std::endl;
+    }
+    
+private:
+    std::string officeLocation;
+};
+
+int main() {
+    Student student("John Doe");
+    Professor professor("Dr. Smith", "Room 101");
+
+    student.addCourse("Math 101");
+    student.addCourse("Physics 101");
+    student.listCourses();
+
+    professor.displayOfficeLocation();
+
+    student.removeCourse("Math 101");
+    student.listCourses();
+
+    return 0;
+}
