@@ -1,3 +1,14 @@
+/*
+Name: Miles Fisher
+Class: CS 250
+Code purpose: 
+    - Implementing a system to record student names, classes
+      professors, and room numbers.
+    - The code uses classes and inheritance
+    - The code lists all of the courses with their
+      course informaiton
+*/
+
 #include <iostream>
 #include "Person.h"
 #include "Student.h"
